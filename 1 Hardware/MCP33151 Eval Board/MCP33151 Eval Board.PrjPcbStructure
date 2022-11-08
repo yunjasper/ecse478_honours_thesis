@@ -1,0 +1,11 @@
+Record=TopLevelDocument|FileName=ADC.SchDoc|SheetNumber=9
+Record=NoMainPathDocument|SourceDocument=ADC.SchDoc|FileName=Analog - High Speed DE.SchDoc|SheetNumber=7
+Record=NoMainPathDocument|SourceDocument=ADC.SchDoc|FileName=Analog - Low Speed SE.SchDoc|SheetNumber=8
+Record=NoMainPathDocument|SourceDocument=ADC.SchDoc|FileName=Connectors.SchDoc|SheetNumber=2
+Record=NoMainPathDocument|SourceDocument=ADC.SchDoc|FileName=Cover.SchDoc|SheetNumber=1
+Record=NoMainPathDocument|SourceDocument=ADC.SchDoc|FileName=Debug.SchDoc|SheetNumber=11
+Record=NoMainPathDocument|SourceDocument=ADC.SchDoc|FileName=Digital IO Protection.SchDoc|SheetNumber=6
+Record=NoMainPathDocument|SourceDocument=ADC.SchDoc|FileName=IO Expansion.SchDoc|SheetNumber=5
+Record=NoMainPathDocument|SourceDocument=ADC.SchDoc|FileName=Microcontroller.SchDoc|SheetNumber=4
+Record=NoMainPathDocument|SourceDocument=ADC.SchDoc|FileName=Power.SchDoc|SheetNumber=3
+Record=NoMainPathDocument|SourceDocument=ADC.SchDoc|FileName=Relay Drivers.SchDoc|SheetNumber=10
