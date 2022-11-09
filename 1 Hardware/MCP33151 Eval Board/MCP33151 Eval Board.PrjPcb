@@ -33,7 +33,7 @@ FSMCodingStyle=eFMSDropDownList_OneProcess
 FSMEncodingStyle=eFMSDropDownList_OneHot
 IsProjectConflictPreventionWarningsEnabled=0
 IsVirtualBomDocumentRemoved=0
-OutputPath=Project Outputs for MCP33151 Eval Board
+OutputPath=
 LogFolderPath=
 ManagedProjectGUID=
 IncludeDesignInRelease=0
@@ -275,24 +275,29 @@ UniqueID=A02F4719-76CE-49ED-905E-2A0E2586BED1
 Description=Default to test
 AllowFabrication=0
 ParameterCount=0
-VariationCount=16
-Variation1=Designator=C?|UniqueId=\DERNOZAT|Kind=1|AlternatePart= 
-Variation2=Designator=C?|UniqueId=\NGVWKSHT|Kind=1|AlternatePart= 
-Variation3=Designator=C?|UniqueId=\AAAGLBUB|Kind=1|AlternatePart= 
-Variation4=Designator=R?|UniqueId=\ZEWOPYFE|Kind=1|AlternatePart= 
-Variation5=Designator=C?|UniqueId=\JQZKTZCT|Kind=1|AlternatePart= 
-Variation6=Designator=C?|UniqueId=\DWIMVYUJ|Kind=1|AlternatePart= 
-Variation7=Designator=C?|UniqueId=\HBUEAAVG|Kind=1|AlternatePart= 
-Variation8=Designator=R?|UniqueId=\TJKJMUUK|Kind=1|AlternatePart= 
-Variation9=Designator=R?|UniqueId=\CNLSJIML|Kind=1|AlternatePart= 
-Variation10=Designator=R?|UniqueId=\SEQUZRJX|Kind=1|AlternatePart= 
-Variation11=Designator=C?|UniqueId=\VDHNHDHN|Kind=1|AlternatePart= 
-Variation12=Designator=C?|UniqueId=\SMADQKAB|Kind=1|AlternatePart= 
-Variation13=Designator=R?|UniqueId=\FUTAZBTE|Kind=1|AlternatePart= 
-Variation14=Designator=C?|UniqueId=\XZEOMNCF|Kind=1|AlternatePart= 
+VariationCount=17
+Variation1=Designator=C6|UniqueId=\DERNOZAT|Kind=1|AlternatePart= 
+Variation2=Designator=C4|UniqueId=\NGVWKSHT|Kind=1|AlternatePart= 
+Variation3=Designator=C20|UniqueId=\AAAGLBUB|Kind=1|AlternatePart= 
+Variation4=Designator=R32|UniqueId=\ZEWOPYFE|Kind=1|AlternatePart= 
+Variation5=Designator=C35|UniqueId=\JQZKTZCT|Kind=1|AlternatePart= 
+Variation6=Designator=C39|UniqueId=\DWIMVYUJ|Kind=1|AlternatePart= 
+Variation7=Designator=C36|UniqueId=\HBUEAAVG|Kind=1|AlternatePart= 
+Variation8=Designator=R46|UniqueId=\TJKJMUUK|Kind=1|AlternatePart= 
+Variation9=Designator=R49|UniqueId=\CNLSJIML|Kind=1|AlternatePart= 
+Variation10=Designator=R48|UniqueId=\SEQUZRJX|Kind=1|AlternatePart= 
+Variation11=Designator=C53|UniqueId=\VDHNHDHN|Kind=1|AlternatePart= 
+Variation12=Designator=C57|UniqueId=\SMADQKAB|Kind=1|AlternatePart= 
+Variation13=Designator=R67|UniqueId=\FUTAZBTE|Kind=1|AlternatePart= 
+Variation14=Designator=C76|UniqueId=\XZEOMNCF|Kind=1|AlternatePart= 
 Variation15=Designator=R84|UniqueId=\SXVFYZFB|Kind=1|AlternatePart= 
-Variation16=Designator=R85|UniqueId=\MUMELTNU|Kind=0|AlternatePart= 
+Variation16=Designator=R88|UniqueId=\WFWYWLEU|Kind=1|AlternatePart= 
+Variation17=Designator=R90|UniqueId=\MIELWUCH|Kind=1|AlternatePart= 
 ParamVariationCount=0
+
+[GeneratedDocument1]
+DocumentPath=Project Outputs for MCP33151 Eval Board\Design Rule Check - MCP33151 Eval Board.html
+DItemRevisionGUID=
 
 [Configuration1]
 Name=Sources
@@ -305,7 +310,7 @@ ContentTypeGUID=CB6F2064-E317-11DF-B822-12313F0024A2
 ConfigurationType=Source
 
 [Generic_EDE]
-OutputDir=Project Outputs for MCP33151 Eval Board
+OutputDir=
 
 [OutputGroup1]
 Name=Netlist Outputs
