@@ -1,7 +1,7 @@
 Protel Design System Design Rule Check
 PCB File : C:\Users\jaspe\Desktop\ecse478_honours_thesis\1 Hardware\MCP33151 Eval Board\MCP33151 Eval Board.PcbDoc
 Date     : 2022-11-10
-Time     : 9:13:39 PM
+Time     : 9:29:44 PM
 
 Processing Rule : Clearance Constraint (Gap=10mil) (InNetClass('AIN_LS_SE')),(InNetClass('AIN_LS_SE'))
 Rule Violations :0

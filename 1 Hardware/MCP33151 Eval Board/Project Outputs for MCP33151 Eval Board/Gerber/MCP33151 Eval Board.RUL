@@ -1,0 +1,8 @@
+DRC Rules Export File for PCB: C:\Users\jaspe\Desktop\ecse478_honours_thesis\1 Hardware\MCP33151 Eval Board\MCP33151 Eval Board.PcbDoc
+RuleKind=Width|RuleName=SPI_1|Scope=Board|Minimum=4.00
+RuleKind=Clearance|RuleName=SPI|Scope=Board|Minimum=10.00
+RuleKind=Clearance|RuleName=AIN LS SE|Scope=Board|Minimum=10.00
+RuleKind=SolderMaskExpansion|RuleName=SolderMaskExpansion|Scope=Board|Minimum=4.00
+RuleKind=Width|RuleName=Width|Scope=Board|Minimum=5.00
+RuleKind=Clearance|RuleName=Clearance|Scope=Board|Minimum=10.00
+RuleKind=ShortCircuit|RuleName=ShortCircuit|Scope=Board|Allowed=0

@@ -1,0 +1,12 @@
+Output: NC Drill Files
+Type  : NC Drill
+From  : PCB Document [MCP33151 Eval Board.PcbDoc]
+   Generated File[MCP33151 Eval Board.TXT]
+   Generated File[MCP33151 Eval Board.LDP]
+   Generated File[MCP33151 Eval Board.DRR]
+
+
+Files Generated   : 3
+Documents Printed : 0
+
+Finished Output Generation At 9:37:54 PM On 2022-11-10
