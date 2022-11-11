@@ -270,6 +270,23 @@ DItemRevisionGUID=
 GenerateClassCluster=0
 DocumentUniqueId=FWFNWIWD
 
+[Document14]
+DocumentPath=MCP33151 Eval Board.PCBDwf
+AnnotationEnabled=1
+AnnotateStartValue=1
+AnnotationIndexControlEnabled=0
+AnnotateSuffix=
+AnnotateScope=All
+AnnotateOrder=-1
+DoLibraryUpdate=1
+DoDatabaseUpdate=1
+ClassGenCCAutoEnabled=1
+ClassGenCCAutoRoomEnabled=1
+ClassGenNCAutoScope=None
+DItemRevisionGUID=
+GenerateClassCluster=0
+DocumentUniqueId=SAQNPBVJ
+
 [ProjectVariant1]
 UniqueID=A02F4719-76CE-49ED-905E-2A0E2586BED1
 Description=Default to test
