@@ -20,9 +20,9 @@
 #define CS_HS_ADC   10
 
 // ADC parameters
-#define VOLTAGE_REFERENCE 4.980     // Volts
+#define VOLTAGE_REFERENCE 4.999     // Volts
 #define ADC_RESOLUTION    14        // bits
-#define ADC_SPI_FREQ      50000000  // Hz
+#define ADC_SPI_FREQ      40000000  // Hz
 
 // mux pins
 #define MUX_HS_AIN_A0     2
@@ -35,8 +35,8 @@
 #define MUX_LS_AIN_1_A1   36
 #define MUX_LS_AIN_1_A2   37
 #define MUX_LS_AIN_2_A0   39        // LS AIN 9 to 16
-#define MUX_LS_AIN_2_A1   40
-#define MUX_LS_AIN_2_A2   41
+#define MUX_LS_AIN_2_A1   41
+#define MUX_LS_AIN_2_A2   40
 #define MUX_LS_GAIN_A0    34
 #define MUX_LS_GAIN_A1    33
 
@@ -99,8 +99,9 @@ void setup() {
   pinMode(MUX_LS_AIN_2_A2, OUTPUT);
   pinMode(MUX_LS_GAIN_A0, OUTPUT);
   pinMode(MUX_LS_GAIN_A1, OUTPUT);
+  pinMode(DEBUG_LED3, OUTPUT);
 
-//  attachInterrupt(digitalPinToInterrupt(FIO_1_PIN), buttonISR, FALLING);
+  attachInterrupt(digitalPinToInterrupt(FIO_1_PIN), buttonISR, FALLING);
   Serial.println("Attached interrupt");
   
   digitalWrite(CS_HS_ADC, HIGH);
@@ -119,29 +120,57 @@ void setup() {
   digitalWrite(MUX_LS_AIN_2_A2, LOW);
   digitalWrite(MUX_LS_GAIN_A0, LOW);
   digitalWrite(MUX_LS_GAIN_A1, LOW);
+  digitalWrite(DEBUG_LED3, LOW);
 
   SPI.begin();
   Serial.println("Finished setup");
 //  myTimer.begin(spiread16_1, TIMER_PERIOD_US);
 
   channelNo = 0;
+  setLSAINMuxChannel(channelNo);
+  setLSGainMux(1);
 
 }
 
-void loop() {
 
-  // read 
-  uint16_t raw = spiread16(CS_LS_ADC);
-  float vadc = ((float) (raw * VOLTAGE_REFERENCE) / (1 << ADC_RESOLUTION));
+void loop() {
   char buf[100];
-  sprintf(buf, "Channel = %d\tVadc = %.5f\r\n", channelNo, vadc);
-  Serial.print(buf);
-//  setLSAINMuxChannel(channelNo++);
-//  if (channelNo > 15) {
-//    channelNo = 0;
-//  }
-//  Serial.println("Incremented channelNo");
-  delay(100);
+  uint8_t gains[] = {1, 10, 50, 100};
+  for (uint32_t j = 0; j < 4; j++) {
+    
+    setLSGainMux(gains[j]);
+    Serial.print("Gain set to ");
+    Serial.println(gains[j]);
+
+    float measurements[1000] = {0};
+    float avg = 0;
+    for (uint32_t i = 0; i < 1000; i++) {
+      // read 
+      uint16_t raw = spiread16(CS_LS_ADC);
+      float vadc = ((float) (raw * VOLTAGE_REFERENCE) / (1 << ADC_RESOLUTION));
+      
+      sprintf(buf, "Channel = %d\tVadc = %.5f\r\n", channelNo, vadc);
+      Serial.print(buf);
+    //  setLSAINMuxChannel(channelNo++);
+    //  if (channelNo > 15) {
+    //    channelNo = 0;
+    //  }
+    //  Serial.println("Incremented channelNo");
+      avg += vadc;
+      delay(20);  
+    }
+  
+    avg /= 1000;
+    sprintf(buf, "Averaged 1000 samples, Vavg = %.5f\r\n", avg);
+    Serial.print(buf);
+    digitalWrite(DEBUG_LED3, HIGH);
+    delay(5000);
+
+  }
+
+  while (1);
+    
+  
   
 //  if (isReadyToPrint) {
 //    isReadyToPrint = 0;
@@ -173,8 +202,8 @@ uint16_t spiread16(uint8_t cs) {
   for (uint8_t i = 0; i < 2; i++) {
     buf[i] = SPI.transfer(0);
   }
-  digitalWrite(cs, HIGH);
   SPI.endTransaction();
+  digitalWrite(cs, HIGH);
 
   uint16_t res = buf[0];
   res <<= 8;
@@ -187,7 +216,7 @@ uint16_t spiread16(uint8_t cs) {
 
 
 uint16_t spiread16_1() {
-  uint8_t cs = CS_HS_ADC;
+  uint8_t cs = CS_LS_ADC;
   noInterrupts();
   
   uint8_t buf[2] = {0};
@@ -221,8 +250,8 @@ uint16_t spiread16_1() {
 // note that channel starts counting from zero!
 void setHSAINMuxChannel(uint8_t channel) {
   if (channel < 4) {
-    digitalWrite(MUX_HS_AIN_A0, channel % 2);
-    digitalWrite(MUX_HS_AIN_A1, channel / 2);  
+    digitalWrite(MUX_HS_AIN_A0, channel & 0x1);
+    digitalWrite(MUX_HS_AIN_A1, channel & (0x1 << 1));  
   }
   else {
     // do nothing, invalid input
@@ -233,20 +262,20 @@ void setHSAINMuxChannel(uint8_t channel) {
 // note that channel starts counting from zero!
 void setLSAINMuxChannel(uint8_t channel) {
   if (channel < 8) {
-    digitalWrite(MUX_LS_SELECT_A0, 0);
-    digitalWrite(MUX_LS_SELECT_A1, 0);
-
-    digitalWrite(MUX_LS_AIN_1_A0, channel % 2);
-    digitalWrite(MUX_LS_AIN_1_A1, channel / 2);
-    digitalWrite(MUX_LS_AIN_1_A2, channel / 4);  
-  }
-  else if (channel < 16) {
     digitalWrite(MUX_LS_SELECT_A0, 1);
     digitalWrite(MUX_LS_SELECT_A1, 0);
+
+    digitalWrite(MUX_LS_AIN_1_A0, (channel & 0x1));
+    digitalWrite(MUX_LS_AIN_1_A1, channel & (0x1 << 1));
+    digitalWrite(MUX_LS_AIN_1_A2, channel & (0x1 << 2));  
+  }
+  else if (channel < 16) {
+    digitalWrite(MUX_LS_SELECT_A0, 0);
+    digitalWrite(MUX_LS_SELECT_A1, 0);
     
-    digitalWrite(MUX_LS_AIN_2_A0, channel % 2);
-    digitalWrite(MUX_LS_AIN_2_A1, channel / 2);
-    digitalWrite(MUX_LS_AIN_2_A2, channel / 4);  
+    digitalWrite(MUX_LS_AIN_2_A0, (channel & 0x1));
+    digitalWrite(MUX_LS_AIN_2_A1, channel & (0x1 << 1));
+    digitalWrite(MUX_LS_AIN_2_A2, channel & (0x1 << 2));
   }
   else {
     // do nothing, invalid input
@@ -254,12 +283,38 @@ void setLSAINMuxChannel(uint8_t channel) {
   }
 }
 
+/**
+ * valid inputs: 1, 10, 50, 100 v/v gain
+ */
+void setLSGainMux(uint8_t gainValue) {
+  if (gainValue == 1) {
+    digitalWrite(MUX_LS_GAIN_A0, 0);
+    digitalWrite(MUX_LS_GAIN_A1, 0);
+  }
+  else if (gainValue == 10) {
+    digitalWrite(MUX_LS_GAIN_A0, 1);
+    digitalWrite(MUX_LS_GAIN_A1, 0);
+  }
+  else if (gainValue == 50) {
+    digitalWrite(MUX_LS_GAIN_A0, 0);
+    digitalWrite(MUX_LS_GAIN_A1, 1);
+  }
+  else if (gainValue == 100) {
+    digitalWrite(MUX_LS_GAIN_A0, 1);
+    digitalWrite(MUX_LS_GAIN_A1, 1);
+  }
+  else {
+    Serial.println("Invalid LS gain setting requested");
+  }
+}
+
 void buttonISR() {
+  uint8_t gains[] = {1, 10, 50, 100};
   channelNo += 1;
-  if (channelNo > 15) {
+  if (channelNo > 3) {
     channelNo = 0;
   }
-  Serial.print("Changed SE channel to ");
-  Serial.println(channelNo);
-  setHSAINMuxChannel(channelNo);
+  Serial.print("Changed SE gain channel to ");
+  Serial.println(gains[channelNo]);
+  setLSGainMux(gains[channelNo]);
 }
