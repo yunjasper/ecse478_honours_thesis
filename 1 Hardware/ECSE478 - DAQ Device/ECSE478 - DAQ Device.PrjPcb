@@ -66,7 +66,7 @@ GenerateClassCluster=0
 DocumentUniqueId=OYJXUXMK
 
 [Document2]
-DocumentPath=Connectors.SchDoc
+DocumentPath=Connectors - Analog.SchDoc
 AnnotationEnabled=1
 AnnotateStartValue=1
 AnnotationIndexControlEnabled=0
@@ -83,6 +83,23 @@ GenerateClassCluster=0
 DocumentUniqueId=ZNEHSAEQ
 
 [Document3]
+DocumentPath=Connectors - Digital.SchDoc
+AnnotationEnabled=1
+AnnotateStartValue=1
+AnnotationIndexControlEnabled=0
+AnnotateSuffix=
+AnnotateScope=All
+AnnotateOrder=-1
+DoLibraryUpdate=1
+DoDatabaseUpdate=1
+ClassGenCCAutoEnabled=1
+ClassGenCCAutoRoomEnabled=1
+ClassGenNCAutoScope=None
+DItemRevisionGUID=
+GenerateClassCluster=0
+DocumentUniqueId=BAMOGNOM
+
+[Document4]
 DocumentPath=Power.SchDoc
 AnnotationEnabled=1
 AnnotateStartValue=1
@@ -98,23 +115,6 @@ ClassGenNCAutoScope=None
 DItemRevisionGUID=
 GenerateClassCluster=0
 DocumentUniqueId=PJLGTJJW
-
-[Document4]
-DocumentPath=Communication.SchDoc
-AnnotationEnabled=1
-AnnotateStartValue=1
-AnnotationIndexControlEnabled=0
-AnnotateSuffix=
-AnnotateScope=All
-AnnotateOrder=3
-DoLibraryUpdate=1
-DoDatabaseUpdate=1
-ClassGenCCAutoEnabled=1
-ClassGenCCAutoRoomEnabled=1
-ClassGenNCAutoScope=None
-DItemRevisionGUID=
-GenerateClassCluster=0
-DocumentUniqueId=OZIWKRAP
 
 [Document5]
 DocumentPath=Microcontroller.SchDoc
@@ -185,23 +185,6 @@ GenerateClassCluster=0
 DocumentUniqueId=VOEMLDED
 
 [Document9]
-DocumentPath=Data Storage.SchDoc
-AnnotationEnabled=1
-AnnotateStartValue=1
-AnnotationIndexControlEnabled=0
-AnnotateSuffix=
-AnnotateScope=All
-AnnotateOrder=7
-DoLibraryUpdate=1
-DoDatabaseUpdate=1
-ClassGenCCAutoEnabled=1
-ClassGenCCAutoRoomEnabled=1
-ClassGenNCAutoScope=None
-DItemRevisionGUID=
-GenerateClassCluster=0
-DocumentUniqueId=EVOGKCUQ
-
-[Document10]
 DocumentPath=Analog - High Speed SE.SchDoc
 AnnotationEnabled=1
 AnnotateStartValue=1
@@ -218,7 +201,7 @@ DItemRevisionGUID=
 GenerateClassCluster=0
 DocumentUniqueId=PCTPLYKN
 
-[Document11]
+[Document10]
 DocumentPath=Analog - High Speed DE.SchDoc
 AnnotationEnabled=1
 AnnotateStartValue=1
@@ -235,7 +218,7 @@ DItemRevisionGUID=
 GenerateClassCluster=0
 DocumentUniqueId=HLANTEIJ
 
-[Document12]
+[Document11]
 DocumentPath=Analog - Low Speed SE.SchDoc
 AnnotationEnabled=1
 AnnotateStartValue=1
@@ -252,7 +235,7 @@ DItemRevisionGUID=
 GenerateClassCluster=0
 DocumentUniqueId=OIERKACL
 
-[Document13]
+[Document12]
 DocumentPath=ADC.SchDoc
 AnnotationEnabled=1
 AnnotateStartValue=1
@@ -269,7 +252,7 @@ DItemRevisionGUID=
 GenerateClassCluster=0
 DocumentUniqueId=PRJMLKDI
 
-[Document14]
+[Document13]
 DocumentPath=Debug.SchDoc
 AnnotationEnabled=1
 AnnotateStartValue=1
@@ -286,7 +269,7 @@ DItemRevisionGUID=
 GenerateClassCluster=0
 DocumentUniqueId=GNCYRRUG
 
-[Document15]
+[Document14]
 DocumentPath=ECSE478 - DAQ Device.OutJob
 AnnotationEnabled=1
 AnnotateStartValue=1
@@ -931,7 +914,7 @@ Type32=1
 Type33=1
 Type34=1
 Type35=1
-Type36=1
+Type36=0
 Type37=1
 Type38=1
 Type39=1
@@ -1039,7 +1022,7 @@ Type18=1
 Type19=1
 Type20=1
 Type21=1
-Type22=1
+Type22=0
 Type23=1
 Type24=1
 Type25=1

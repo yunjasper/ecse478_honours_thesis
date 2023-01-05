@@ -42,6 +42,7 @@
 #define MUX_LS_AIN_2_A2   40
 #define MUX_LS_GAIN_A0    34
 #define MUX_LS_GAIN_A1    33
+#define MUX_SWITCH_TIME   250       // ns
 
 // FIO pins (connected directly to Teensy)
 #define FIO_1_PIN         0
@@ -54,6 +55,50 @@
 #define FIO_8_PIN         29
 #define FIO_9_PIN         30
 #define FIO_10_PIN        31
+
+// IO expander
+#define IO_EXPANSION_NRESET_PIN 7
+#define IO_EXPANSION_INT_PIN    8
+#define IO_EXPANSION_1_I2C_ADDR 0x20 // debug LED1, LED2, and relay channels 1-6
+#define IO_EXPANSION_2_I2C_ADDR 0X21 // relay channels 7-8, DIO ports
+
+// IO expander connected pins
+#define DEBUG_LED1_PIN              IO_EXP_1_CH0
+#define DEBUG_LED2_PIN              IO_EXP_1_CH1
+#define RELAY_DRIVER_EN_CH_1_PIN    IO_EXP_1_CH2
+#define RELAY_DRIVER_EN_CH_2_PIN    IO_EXP_1_CH3
+#define RELAY_DRIVER_EN_CH_3_PIN    IO_EXP_1_CH4
+#define RELAY_DRIVER_EN_CH_4_PIN    IO_EXP_1_CH5
+#define RELAY_DRIVER_EN_CH_5_PIN    IO_EXP_1_CH6
+#define RELAY_DRIVER_EN_CH_6_PIN    IO_EXP_1_CH7
+#define RELAY_DRIVER_EN_CH_7_PIN    IO_EXP_2_CH6
+#define RELAY_DRIVER_EN_CH_8_PIN    IO_EXP_2_CH7
+#define DIO_1_PIN                   IO_EXP_2_CH0
+#define DIO_2_PIN                   IO_EXP_2_CH1
+#define DIO_3_PIN                   IO_EXP_2_CH2
+#define DIO_4_PIN                   IO_EXP_2_CH3
+#define DIO_5_PIN                   IO_EXP_2_CH4
+#define DIO_6_PIN                   IO_EXP_2_CH5
+
+// IO expander channels
+#define IO_EXP_1_CH0    0
+#define IO_EXP_1_CH1    1
+#define IO_EXP_1_CH2    2
+#define IO_EXP_1_CH3    3
+#define IO_EXP_1_CH4    4
+#define IO_EXP_1_CH5    5
+#define IO_EXP_1_CH6    6
+#define IO_EXP_1_CH7    7
+#define IO_EXP_2_CH0    0
+#define IO_EXP_2_CH1    1
+#define IO_EXP_2_CH2    2
+#define IO_EXP_2_CH3    3
+#define IO_EXP_2_CH4    4
+#define IO_EXP_2_CH5    5
+#define IO_EXP_2_CH6    6
+#define IO_EXP_2_CH7    7
+
+
 
 // board temperature sensor
 #define BOARD_TEMP_SENSOR_PIN         A7

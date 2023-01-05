@@ -18,6 +18,7 @@
 
 #include "BSP.h"
 #include <Arduino.h>
+#include <Adafruit_MCP23X08.h>  // for IO expander
 #include <SPI.h>
 
 // global variables
@@ -27,8 +28,12 @@ volatile uint8_t arr_position = 0;
 volatile uint8_t isReadyToPrint = 0;
 volatile uint8_t channelNo = 0;
 
+Adafruit_MCP23X08 io_expander_1;  // debug LED1, LED2, and relay channels 1-6 
+Adafruit_MCP23X08 io_expander_2;  // relay channels 7-8, DIO ports
+
 void BSP_init() {
-  
+
+  // set pin modes (inputs or outputs)
   pinMode(CS_HS_ADC, OUTPUT);
   pinMode(CS_LS_ADC, OUTPUT);
   
@@ -57,8 +62,13 @@ void BSP_init() {
   pinMode(FIO_8_PIN, OUTPUT);
   pinMode(FIO_9_PIN, OUTPUT);
   pinMode(FIO_10_PIN, OUTPUT);
-  pinMode(DEBUG_LED3, OUTPUT);  
+  pinMode(DEBUG_LED3, OUTPUT);
 
+  pinMode(IO_EXPANSION_NRESET_PIN, INPUT);
+  pinMode(IO_EXPANSION_INT_PIN, INPUT);
+
+
+  // initialize outputs
   digitalWrite(CS_HS_ADC, HIGH);
   digitalWrite(CS_LS_ADC, HIGH);
   
@@ -88,6 +98,49 @@ void BSP_init() {
   digitalWrite(FIO_9_PIN, HIGH);
   digitalWrite(FIO_10_PIN, HIGH);
   digitalWrite(DEBUG_LED3, LOW);
+
+  // interrupts
+
+  // IO expander I2C initialization 
+  if (!io_expander_1.begin_I2C(IO_EXPANSION_1_I2C_ADDR) {
+    Serial.println("Error initializing IO Expander 1");
+  }
+
+  if (!io_expander_2.begin_I2C(IO_EXPANSION_2_I2C_ADDR) {
+    Serial.println("Error initializing IO Expander 2");
+  }
+
+  // IO expander pin modes (fixed)
+  io_expander_1.pinMode(DEBUG_LED1_PIN, OUTPUT);
+  io_expander_1.pinMode(DEBUG_LED2_PIN, OUTPUT);
+  io_expander_1.pinMode(RELAY_DRIVER_EN_CH_1_PIN, OUTPUT);
+  io_expander_1.pinMode(RELAY_DRIVER_EN_CH_2_PIN, OUTPUT);
+  io_expander_1.pinMode(RELAY_DRIVER_EN_CH_3_PIN, OUTPUT);
+  io_expander_1.pinMode(RELAY_DRIVER_EN_CH_4_PIN, OUTPUT);
+  io_expander_1.pinMode(RELAY_DRIVER_EN_CH_5_PIN, OUTPUT);
+  io_expander_1.pinMode(RELAY_DRIVER_EN_CH_6_PIN, OUTPUT);
+  io_expander_2.pinMode(RELAY_DRIVER_EN_CH_7_PIN, OUTPUT);
+  io_expander_2.pinMode(RELAY_DRIVER_EN_CH_8_PIN, OUTPUT);
+
+  // IO expander pin modes ("flexible") -- set to input for now
+  io_expander_2.pinMode(DIO_1_PIN, INPUT);
+  io_expander_2.pinMode(DIO_2_PIN, INPUT);
+  io_expander_2.pinMode(DIO_3_PIN, INPUT);
+  io_expander_2.pinMode(DIO_4_PIN, INPUT);
+  io_expander_2.pinMode(DIO_5_PIN, INPUT);
+  io_expander_2.pinMode(DIO_6_PIN, INPUT);
+  
+  // IO expander initialize outputs
+  io_expander_1.digitalWrite(DEBUG_LED1_PIN, LOW);
+  io_expander_1.digitalWrite(DEBUG_LED2_PIN, LOW);
+  io_expander_1.digitalWrite(RELAY_DRIVER_EN_CH_1_PIN, LOW);
+  io_expander_1.digitalWrite(RELAY_DRIVER_EN_CH_2_PIN, LOW);
+  io_expander_1.digitalWrite(RELAY_DRIVER_EN_CH_3_PIN, LOW);
+  io_expander_1.digitalWrite(RELAY_DRIVER_EN_CH_4_PIN, LOW);
+  io_expander_1.digitalWrite(RELAY_DRIVER_EN_CH_5_PIN, LOW);
+  io_expander_1.digitalWrite(RELAY_DRIVER_EN_CH_6_PIN, LOW);
+  io_expander_2.digitalWrite(RELAY_DRIVER_EN_CH_7_PIN, LOW);
+  io_expander_2.digitalWrite(RELAY_DRIVER_EN_CH_8_PIN, LOW);
 
 }
 
@@ -148,7 +201,7 @@ uint16_t spiread16_callback() {
 float readBoardTemperature() {
   analogReadResolution(12);
   uint16_t raw = analogRead(BOARD_TEMP_SENSOR_PIN);
-  float voltage = raw * 3.3 / 4096; // assuming 12 bit ADC mode
+  float voltage = raw * 3.3 / (1 << 12); // assuming 12 bit ADC mode
   float temperature = (voltage - BOARD_TEMP_SENSOR_OUTPUT_0C) / BOARD_TEMP_SENSOR_SLOPE;
   return temperature;
 }
@@ -157,7 +210,8 @@ float readBoardTemperature() {
 void setHSAINMuxChannel(uint8_t channel) {
   if (channel < 4) {
     digitalWrite(MUX_HS_AIN_A0, channel & 0x1);
-    digitalWrite(MUX_HS_AIN_A1, channel & (0x1 << 1));  
+    digitalWrite(MUX_HS_AIN_A1, channel & (0x1 << 1));
+    delayNanoseconds(MUX_SWITCH_TIME);
   }
   else {
     // do nothing, invalid input
@@ -173,7 +227,7 @@ void setLSAINMuxChannel(uint8_t channel) {
 
     digitalWrite(MUX_LS_AIN_1_A0, (channel & 0x1));
     digitalWrite(MUX_LS_AIN_1_A1, channel & (0x1 << 1));
-    digitalWrite(MUX_LS_AIN_1_A2, channel & (0x1 << 2));  
+    digitalWrite(MUX_LS_AIN_1_A2, channel & (0x1 << 2));
   }
   else if (channel < 16) {
     digitalWrite(MUX_LS_SELECT_A0, 0);
@@ -187,6 +241,7 @@ void setLSAINMuxChannel(uint8_t channel) {
     // do nothing, invalid input
     Serial.println("Invalid LS AIN channel requested");
   }
+  delayNanoseconds(MUX_SWITCH_TIME);
 }
 
 /**
@@ -212,6 +267,7 @@ void setLSGainMux(uint8_t gainValue) {
   else {
     Serial.println("Invalid LS gain setting requested");
   }
+  delayNanoseconds(MUX_SWITCH_TIME);
 }
 
 /**
@@ -237,4 +293,5 @@ void setHSGainMux(uint8_t gainValue) {
   else {
     Serial.println("Invalid HS gain setting requested");
   }
+  delayNanoseconds(MUX_SWITCH_TIME);
 }
