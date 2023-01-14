@@ -372,6 +372,74 @@ ParamVariationCount=12
 DocumentPath=Project Outputs for ECSE478 - DAQ Device\Design Rule Check - ECSE478 - DAQ Device.html
 DItemRevisionGUID=
 
+[GeneratedDocument2]
+DocumentPath=Project Outputs for ECSE478 - DAQ Device\NC Drill\ECSE478 - DAQ Device.DRR
+DItemRevisionGUID=
+
+[GeneratedDocument3]
+DocumentPath=Project Outputs for ECSE478 - DAQ Device\Gerber\ECSE478 - DAQ Device.EXTREP
+DItemRevisionGUID=
+
+[GeneratedDocument4]
+DocumentPath=Project Outputs for ECSE478 - DAQ Device\Gerber\ECSE478 - DAQ Device.G1
+DItemRevisionGUID=
+
+[GeneratedDocument5]
+DocumentPath=Project Outputs for ECSE478 - DAQ Device\Gerber\ECSE478 - DAQ Device.G2
+DItemRevisionGUID=
+
+[GeneratedDocument6]
+DocumentPath=Project Outputs for ECSE478 - DAQ Device\Gerber\ECSE478 - DAQ Device.GBL
+DItemRevisionGUID=
+
+[GeneratedDocument7]
+DocumentPath=Project Outputs for ECSE478 - DAQ Device\Gerber\ECSE478 - DAQ Device.GBO
+DItemRevisionGUID=
+
+[GeneratedDocument8]
+DocumentPath=Project Outputs for ECSE478 - DAQ Device\Gerber\ECSE478 - DAQ Device.GBP
+DItemRevisionGUID=
+
+[GeneratedDocument9]
+DocumentPath=Project Outputs for ECSE478 - DAQ Device\Gerber\ECSE478 - DAQ Device.GBS
+DItemRevisionGUID=
+
+[GeneratedDocument10]
+DocumentPath=Project Outputs for ECSE478 - DAQ Device\Gerber\ECSE478 - DAQ Device.GM2
+DItemRevisionGUID=
+
+[GeneratedDocument11]
+DocumentPath=Project Outputs for ECSE478 - DAQ Device\Gerber\ECSE478 - DAQ Device.GTL
+DItemRevisionGUID=
+
+[GeneratedDocument12]
+DocumentPath=Project Outputs for ECSE478 - DAQ Device\Gerber\ECSE478 - DAQ Device.GTO
+DItemRevisionGUID=
+
+[GeneratedDocument13]
+DocumentPath=Project Outputs for ECSE478 - DAQ Device\Gerber\ECSE478 - DAQ Device.GTP
+DItemRevisionGUID=
+
+[GeneratedDocument14]
+DocumentPath=Project Outputs for ECSE478 - DAQ Device\Gerber\ECSE478 - DAQ Device.GTS
+DItemRevisionGUID=
+
+[GeneratedDocument15]
+DocumentPath=Project Outputs for ECSE478 - DAQ Device\NC Drill\ECSE478 - DAQ Device.LDP
+DItemRevisionGUID=
+
+[GeneratedDocument16]
+DocumentPath=Project Outputs for ECSE478 - DAQ Device\Gerber\ECSE478 - DAQ Device.REP
+DItemRevisionGUID=
+
+[GeneratedDocument17]
+DocumentPath=Project Outputs for ECSE478 - DAQ Device\Gerber\ECSE478 - DAQ Device.RUL
+DItemRevisionGUID=
+
+[GeneratedDocument18]
+DocumentPath=Project Outputs for ECSE478 - DAQ Device\NC Drill\ECSE478 - DAQ Device.TXT
+DItemRevisionGUID=
+
 [Configuration1]
 Name=Sources
 ParameterCount=0
