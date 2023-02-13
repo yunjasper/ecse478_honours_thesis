@@ -23,7 +23,10 @@ IntervalTimer myTimer;
 void buttonISR();
 
 void setup() {
-  bringup_testing::blinky_onboardLED(250, 0);
+  bringup_testing::init();
+//  bringup_testing::blinky_onboardLED(250, 0);
+//  bringup_testing::blinky_FIOs(250, 0);
+  bringup_testing::blinky_DIOs(250, 0);
 }
 
 

@@ -18,10 +18,17 @@
 
 // arduino libraries
 #include <Arduino.h>
+#include <Adafruit_MCP23008.h>
+
+// private functions
+
+
+void bringup_testing::init() {
+    BSP::initPins();
+}
 
 void bringup_testing::blinky_onboardLED(long delayDuration, uint16_t numBlinks) {
     Serial.println("Starting blinky onboard LED test...");
-    BSP::initPins();
     
     if (numBlinks == 0) { // blink forever
         while (1) {
@@ -39,4 +46,74 @@ void bringup_testing::blinky_onboardLED(long delayDuration, uint16_t numBlinks) 
             delay(delayDuration); 
         }
     }
+}
+
+void bringup_testing::blinky_FIOs(long delayDuration, uint16_t numBlinks) {
+    Serial.println("Starting blinky onboard LED test...");
+    
+    uint8_t pinsArray[] = {
+        FIO_1_PIN, 
+        FIO_2_PIN, 
+        FIO_3_PIN, 
+        FIO_4_PIN, 
+        FIO_5_PIN, 
+        FIO_6_PIN, 
+        FIO_7_PIN, 
+        FIO_8_PIN, 
+        FIO_9_PIN, 
+        FIO_10_PIN, 
+    };
+
+    for (uint8_t i = 0; i < 10; i++) {
+        pinMode(pinsArray[i], OUTPUT);
+        digitalWrite(pinsArray[i], LOW);
+    }
+
+    // blink away
+    if (numBlinks == 0) {
+        while (1) {
+            for (uint8_t i = 0; i < 10; i++) {
+                digitalWrite(pinsArray[i], !digitalRead(pinsArray[i]));
+                delay(delayDuration);
+            }
+        }
+    }
+    else {
+        for (uint16_t i = 0; i < numBlinks; i++) {
+            for (uint8_t i = 0; i < 10; i++) {
+                digitalWrite(pinsArray[i], !digitalRead(pinsArray[i]));
+                delay(delayDuration);
+            }
+        }
+    }
+
+}
+
+void bringup_testing::blinky_DIOs(long delayDuration, uint16_t numBlinks) {
+    Adafruit_MCP23008 mcp;
+    mcp.begin(IO_EXPANSION_4_I2C_ADDR);
+
+    // set all pins as outputs
+    for(uint8_t i = 0; i < 8; i++) {
+        mcp.pinMode(i, OUTPUT);
+    }
+
+    // blink away
+    if (numBlinks == 0) {
+        while (1) {
+            for (uint8_t i = 0; i < 8; i++) {
+                mcp.digitalWrite(i, !mcp.digitalRead(i));
+                delay(delayDuration);
+            }
+        }
+    }
+    else {
+        for (uint16_t i = 0; i < numBlinks; i++) {
+            for (uint8_t i = 0; i < 10; i++) {
+                mcp.digitalWrite(i, !mcp.digitalRead(i));
+                delay(delayDuration);
+            }
+        }
+    }
+
 }

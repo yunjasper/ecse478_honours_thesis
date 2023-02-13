@@ -10,9 +10,12 @@
 
 namespace bringup_testing {
 
+    void init(); // wraps BSP::initPins()
+
     // basic tests
     void blinky_onboardLED(long delayDuration, uint16_t numBlinks);
-    void blinky_FIOs();
+    void blinky_FIOs(long delayDuration, uint16_t numBlinks);
+    void blinky_DIOs(long delayDuration, uint16_t numBlinks);
 
     // analog input tests
     void ain_LS_SE_cycle_through();
