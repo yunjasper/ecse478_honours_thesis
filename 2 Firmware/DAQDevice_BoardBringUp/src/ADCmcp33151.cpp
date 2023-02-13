@@ -11,7 +11,7 @@
 #include <SPI.h>
 
 // constructor
-ADCmcp33151::ADCmcp33151(uint8_t csPin, long SPIFreq, float refV, uint8_t numBits=14) {
+ADCmcp33151::ADCmcp33151(uint8_t csPin, long SPIFreq, float refV, uint8_t numBits) {
   cs = csPin;
   SPIFrequency = SPIFreq;
   refVoltage = refV;

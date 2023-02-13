@@ -13,7 +13,7 @@
 #include "AnalogMux.hpp"
 #include <Arduino.h>
 
-AnalogMux::AnalogMuxAnalogMux(uint8_t ctrlPin_a0, uint8_t ctrlPin_a1, uint8_t ctrlPin_a2, int8_t enable_pinNum, uint8_t numChannels, long switchSettleTimens=250) {
+AnalogMux::AnalogMux(uint8_t ctrlPin_a0, uint8_t ctrlPin_a1, uint8_t ctrlPin_a2, int8_t enable_pinNum, uint8_t numChannels, long switchSettleTimens) {
   ctrl_a0 = ctrlPin_a0;
   ctrl_a1 = ctrlPin_a1;
   ctrl_a2 = ctrlPin_a2;

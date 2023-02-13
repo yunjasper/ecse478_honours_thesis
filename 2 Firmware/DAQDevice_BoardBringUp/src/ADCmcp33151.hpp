@@ -12,7 +12,7 @@
 class ADCmcp33151 {
   public: 
     float readVoltage(void);
-    ADCmcp33151(uint8_t csPin, long SPIFreq, float refV, uint8_t numBits=14);
+    ADCmcp33151(uint8_t csPin, long SPIFreq, float refV, uint8_t numBits);
 
   private:
     uint8_t cs; // chip select for SPI

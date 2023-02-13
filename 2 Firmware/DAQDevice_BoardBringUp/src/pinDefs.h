@@ -78,6 +78,9 @@
 #define DEBUG_LED2_PIN               IO_EXP_CH6
 #define DEBUG_LED3_PIN               IO_EXP_CH7
 
+#define DEBUG_LED1_PIN    20
+#define BUZZER_PIN        6
+
 enum IOExpanderChannels {
   IO_EXP_CH0 = 0,
   IO_EXP_CH1 = 1,
