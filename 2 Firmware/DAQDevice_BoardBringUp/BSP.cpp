@@ -17,6 +17,7 @@
  */
 
 #include "BSP.h"
+#include "pinDefs.h"
 #include <Arduino.h>
 //#include <Adafruit_MCP23X08.h>  // for IO expander
 #include <SPI.h>

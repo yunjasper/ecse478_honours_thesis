@@ -21,29 +21,29 @@ void buttonISR();
 
 void setup() {
 
-  for (int i = 0; i < ARRAY_SIZE; i++) {
-    adc_values[i] = 0;
-  }
-  
-  analogReadResolution(12);
-  BSP_init();
-  
-//  while (!Serial);
-  Serial.print("Initializing..");
-  delay(50);
-  Serial.println("done");
-
-//  attachInterrupt(digitalPinToInterrupt(FIO_1_PIN), buttonISR, FALLING);
-  Serial.println("Attached interrupt");
-  
-  SPI.begin();
-  Serial.println("Finished setup");
-
-  channelNo = 0;
-  setLSAINMuxChannel(channelNo);
-  setHSAINMuxChannel(channelNo);
-  setLSGainMux(1);  // unity gain
-  setHSGainMux(100);
+//  for (int i = 0; i < ARRAY_SIZE; i++) {
+//    adc_values[i] = 0;
+//  }
+//  
+//  analogReadResolution(12);
+//  BSP_init();
+//  
+////  while (!Serial);
+//  Serial.print("Initializing..");
+//  delay(50);
+//  Serial.println("done");
+//
+////  attachInterrupt(digitalPinToInterrupt(FIO_1_PIN), buttonISR, FALLING);
+//  Serial.println("Attached interrupt");
+//  
+//  SPI.begin();
+//  Serial.println("Finished setup");
+//
+//  channelNo = 0;
+//  setLSAINMuxChannel(channelNo);
+//  setHSAINMuxChannel(channelNo);
+//  setLSGainMux(1);  // unity gain
+//  setHSGainMux(100);
 
 //  myTimer.begin(spiread16_callback, TIMER_PERIOD_US);
 
