@@ -17,6 +17,9 @@ namespace bringup_testing {
     void blinky_FIOs(long delayDuration, uint16_t numBlinks);
     void blinky_DIOs(long delayDuration, uint16_t numBlinks);
 
+    // relays
+    void relays_all_toggle(long delayDuration);
+    
     // analog input tests
     void ain_LS_SE_cycle_through();
 

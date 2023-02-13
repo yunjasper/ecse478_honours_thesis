@@ -117,3 +117,17 @@ void bringup_testing::blinky_DIOs(long delayDuration, uint16_t numBlinks) {
     }
 
 }
+
+void bringup_testing::relays_all_toggle(long delayDuration) {
+
+    RelayDrivers::init();
+    bool state = false;
+
+    while (1) {
+        for (uint8_t channel = 1; channel <= 24; channel++) {
+            RelayDrivers::setRelayActivatedState(channel,state);
+        }
+        state = !state;
+        delay(delayDuration);
+    }
+}

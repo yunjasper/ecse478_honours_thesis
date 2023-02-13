@@ -31,6 +31,10 @@ void RelayDrivers::init() {
     mcp1.pinMode(i, OUTPUT);
     mcp2.pinMode(i, OUTPUT);
     mcp3.pinMode(i, OUTPUT);
+
+    mcp1.digitalWrite(i, LOW); // relay not powered
+    mcp2.digitalWrite(i, LOW);
+    mcp3.digitalWrite(i, LOW);
   }
 }
 
