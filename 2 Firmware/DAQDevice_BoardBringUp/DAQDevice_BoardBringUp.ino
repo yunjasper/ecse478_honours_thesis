@@ -53,7 +53,7 @@ void setup() {
 void loop() {
   char buf[100];
   uint8_t gains[] = {1, 10, 50, 100};
-  setLSGainMux(1);  // unity gain
+//  setLSGainMux(1);  // unity gain
 //  setHSGainMux(10);
   
   
@@ -139,5 +139,5 @@ void buttonISR() {
 //  setLSGainMux(gains[channelNo]);
 //  setLSAINMuxChannel(channelNo);
 //  setHSAINMuxChannel(channelNo);
-  setHSGainMux(gains[channelNo]);
+//  setHSGainMux(gains[channelNo]);
 }

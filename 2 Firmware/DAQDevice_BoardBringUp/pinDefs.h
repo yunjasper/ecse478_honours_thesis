@@ -69,34 +69,6 @@
 #define IO_EXPANSION_3_I2C_ADDR 0x22 // relay channels 17-24
 #define IO_EXPANSION_4_I2C_ADDR 0x23 // DIO 1-6, debug LEDs 2 and 3
 
-// IO expander connected pins 
-// (todo: find better way to do this...)
-// can probably exploit ((channel # - 1) % 8)
-#define RELAY_DRIVER_EN_CH_1_PIN     IO_EXP_CH0
-#define RELAY_DRIVER_EN_CH_2_PIN     IO_EXP_CH1
-#define RELAY_DRIVER_EN_CH_3_PIN     IO_EXP_CH2
-#define RELAY_DRIVER_EN_CH_4_PIN     IO_EXP_CH3
-#define RELAY_DRIVER_EN_CH_5_PIN     IO_EXP_CH4
-#define RELAY_DRIVER_EN_CH_6_PIN     IO_EXP_CH5
-#define RELAY_DRIVER_EN_CH_7_PIN     IO_EXP_CH6
-#define RELAY_DRIVER_EN_CH_8_PIN     IO_EXP_CH7
-#define RELAY_DRIVER_EN_CH_9_PIN     IO_EXP_CH0
-#define RELAY_DRIVER_EN_CH_10_PIN    IO_EXP_CH1
-#define RELAY_DRIVER_EN_CH_11_PIN    IO_EXP_CH2
-#define RELAY_DRIVER_EN_CH_12_PIN    IO_EXP_CH3
-#define RELAY_DRIVER_EN_CH_13_PIN    IO_EXP_CH4
-#define RELAY_DRIVER_EN_CH_14_PIN    IO_EXP_CH5
-#define RELAY_DRIVER_EN_CH_15_PIN    IO_EXP_CH6
-#define RELAY_DRIVER_EN_CH_16_PIN    IO_EXP_CH7
-#define RELAY_DRIVER_EN_CH_17_PIN    IO_EXP_CH0
-#define RELAY_DRIVER_EN_CH_18_PIN    IO_EXP_CH1
-#define RELAY_DRIVER_EN_CH_19_PIN    IO_EXP_CH2
-#define RELAY_DRIVER_EN_CH_20_PIN    IO_EXP_CH3
-#define RELAY_DRIVER_EN_CH_21_PIN    IO_EXP_CH4
-#define RELAY_DRIVER_EN_CH_22_PIN    IO_EXP_CH5
-#define RELAY_DRIVER_EN_CH_23_PIN    IO_EXP_CH6
-#define RELAY_DRIVER_EN_CH_24_PIN    IO_EXP_CH7
-
 #define DIO_1_PIN                    IO_EXP_CH0
 #define DIO_2_PIN                    IO_EXP_CH1
 #define DIO_3_PIN                    IO_EXP_CH2
@@ -116,8 +88,6 @@ enum IOExpanderChannels {
   IO_EXP_CH6 = 6,
   IO_EXP_CH7 = 7,
 };
-
-
 
 // board temperature sensor
 #define BOARD_TEMP_SENSOR_PIN         A7
