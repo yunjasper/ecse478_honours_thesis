@@ -16,7 +16,7 @@ class AnalogMux {
     bool getEnabled(void);
 
     // constructor
-    AnalogMux(uint8_t ctrlPin_a0, uint8_t ctrlPin_a1, uint8_t ctrlPin_a2, int8_t enable_pinNum, uint8_t numChannels, long switchSettleTimens);
+    AnalogMux(uint8_t ctrlPin_a0, uint8_t ctrlPin_a1, uint8_t ctrlPin_a2, int8_t enable_pinNum, uint8_t numberOfChannels, long switchSettleTimens);
 
   private:
     bool isEnabled;

@@ -11,18 +11,32 @@
 #include <SPI.h>
 
 // constructor
-ADCmcp33151::ADCmcp33151(uint8_t csPin, long SPIFreq, float refV, uint8_t numBits) {
+ADCmcp33151::ADCmcp33151(uint8_t csPin, long SPIFreq, float refV, uint8_t numberOfBits) {
   cs = csPin;
   SPIFrequency = SPIFreq;
   refVoltage = refV;
-  numBits = numBits;
+  numBits = numberOfBits;
 }
 
 float ADCmcp33151::readVoltage(void) {
-  uint16_t raw = spiread16();
-  return ((float) (raw * refVoltage) / (1 << numBits));
+  // ((float) (raw * VOLTAGE_REFERENCE) / (1 << ADC_RESOLUTION))
+
+  float raw = (float) spiread16();
+  Serial.print("Raw value = ");
+  Serial.println(raw);
+
+  float denominator = (float) (1 << numBits);
+  Serial.print("denominator = ");
+  Serial.println(denominator);
+
+  float voltage = raw * refVoltage / denominator;
+  Serial.print("Voltage = ");
+  Serial.println(voltage);
+  
+  return voltage;
 }
 
+// if this function hangs, check that SPI.begin() is called somewhere during setup
 uint16_t ADCmcp33151::spiread16(void) {
   uint8_t buf[2] = {0};
   digitalWrite(cs, LOW);

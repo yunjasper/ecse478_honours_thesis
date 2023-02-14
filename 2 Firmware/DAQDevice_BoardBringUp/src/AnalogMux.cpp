@@ -13,12 +13,12 @@
 #include "AnalogMux.hpp"
 #include <Arduino.h>
 
-AnalogMux::AnalogMux(uint8_t ctrlPin_a0, uint8_t ctrlPin_a1, uint8_t ctrlPin_a2, int8_t enable_pinNum, uint8_t numChannels, long switchSettleTimens) {
+AnalogMux::AnalogMux(uint8_t ctrlPin_a0, uint8_t ctrlPin_a1, uint8_t ctrlPin_a2, int8_t enable_pinNum, uint8_t numberOfChannels, long switchSettleTimens) {
   ctrl_a0 = ctrlPin_a0;
   ctrl_a1 = ctrlPin_a1;
   ctrl_a2 = ctrlPin_a2;
   enable_pin = enable_pinNum;
-  numChannels = numChannels;
+  numChannels = numberOfChannels;
   switchSettleTime = switchSettleTimens; // ns
 
   if (enable_pin >= 0) {
@@ -31,7 +31,7 @@ AnalogMux::AnalogMux(uint8_t ctrlPin_a0, uint8_t ctrlPin_a1, uint8_t ctrlPin_a2,
 
 void AnalogMux::setChannel(uint8_t channel) {
   // check that channel number is valid 
-  if (channel > numChannels) {
+  if (channel > numChannels || channel < 0) {
     Serial.println("Invalid channel number requested.");
     return; // invalid
   } 

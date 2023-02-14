@@ -21,7 +21,7 @@ namespace bringup_testing {
     void relays_all_toggle(long delayDuration);
     
     // analog input tests
-    void ain_LS_SE_cycle_through();
+    void ain_LS_SE_cycle_through(long delayDuration, uint16_t readsPerChannel);
 
 
 

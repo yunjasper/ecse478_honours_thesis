@@ -24,10 +24,14 @@ void buttonISR();
 
 void setup() {
   bringup_testing::init();
+  SPI.begin();
 //  bringup_testing::blinky_onboardLED(250, 0);
 //  bringup_testing::blinky_FIOs(250, 0);
 //  bringup_testing::blinky_DIOs(250, 0);
-  bringup_testing::relays_all_toggle(500);
+//  bringup_testing::relays_all_toggle(500);
+
+  bringup_testing::ain_LS_SE_cycle_through(250, 20);
+  
 }
 
 

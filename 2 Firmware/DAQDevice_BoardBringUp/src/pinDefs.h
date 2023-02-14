@@ -24,7 +24,7 @@
 // ADC parameters
 #define VOLTAGE_REFERENCE 4.999     // Volts
 #define ADC_RESOLUTION    14        // bits
-#define ADC_SPI_FREQ      40000000  // Hz
+#define ADC_SPI_FREQ      400000  // Hz
 
 // analog mux control pins
 #define MUX_HS_DE_AIN_A0     3
@@ -46,6 +46,9 @@
 #define MUX_LS_AIN_A2        37
 #define MUX_LS_GAIN_A0       34
 #define MUX_LS_GAIN_A1       33
+
+#define MUX_LS_SE_SEL_A0     14
+#define MUX_LS_SE_SEL_A1     38
 
 #define MUX_SWITCH_TIME      250       // ns
 
