@@ -11,10 +11,10 @@
 #include <stdint.h>
 
 enum AnalogInputsGains {
-        gain_1 = 1,
-        gain_10 = 2,
-        gain_50 = 3,
-        gain_100 = 4
+        gain_1 = 0,
+        gain_10,
+        gain_50,
+        gain_100
 };
 
 class AnalogInputs {

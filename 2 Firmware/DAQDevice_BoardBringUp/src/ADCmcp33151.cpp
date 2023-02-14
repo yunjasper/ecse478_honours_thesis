@@ -16,23 +16,17 @@ ADCmcp33151::ADCmcp33151(uint8_t csPin, long SPIFreq, float refV, uint8_t number
   SPIFrequency = SPIFreq;
   refVoltage = refV;
   numBits = numberOfBits;
+
+  // initialize cs pin in case app forgot to init
+  pinMode(cs, OUTPUT);
+  digitalWrite(cs, HIGH);
 }
 
 float ADCmcp33151::readVoltage(void) {
   // ((float) (raw * VOLTAGE_REFERENCE) / (1 << ADC_RESOLUTION))
 
   float raw = (float) spiread16();
-  Serial.print("Raw value = ");
-  Serial.println(raw);
-
-  float denominator = (float) (1 << numBits);
-  Serial.print("denominator = ");
-  Serial.println(denominator);
-
-  float voltage = raw * refVoltage / denominator;
-  Serial.print("Voltage = ");
-  Serial.println(voltage);
-  
+  float voltage = raw * refVoltage / ((float) (1 << numBits));
   return voltage;
 }
 

@@ -19,6 +19,8 @@
 // arduino libraries
 #include <Arduino.h>
 #include <Adafruit_MCP23008.h>
+#include <string.h>
+#include <stdio.h>
 
 // private functions
 
@@ -136,42 +138,61 @@ void bringup_testing::ain_LS_SE_cycle_through(long delayDuration, uint16_t reads
     AnalogInputs ains;
     ains.init();
     ains.ls_se_ain_setGain(gain_1);
+    char bufff[1000] = {0};
+    sprintf(bufff, "LS SE GAIN MUX -- A1, A0 = %d, %d\r\n",
+        digitalRead(MUX_LS_GAIN_A1),
+        digitalRead(MUX_LS_GAIN_A0)
+    );
+    // Serial.print(bufff);
 
-    // for (uint8_t channel = 1; channel <= 24; channel++) {
-    //     Serial.print("LS SE Channel = ");
-    //     Serial.println(channel);
+    for (uint8_t channel = 1; channel <= 24; channel++) {
+        Serial.print("LS SE Channel = ");
+        Serial.println(channel);
 
-    //     for (uint16_t numReads = 0; numReads < readsPerChannel; numReads++) {
-    //         float voltage = ains.ls_se_ain_readChannel(channel);
-    //         Serial.print("\tVoltage = ");
-    //         Serial.println(voltage);
-    //         delay(delayDuration);
-    //     }
-    // }
+        for (uint16_t numReads = 0; numReads < readsPerChannel; numReads++) {
+            float voltage = ains.ls_se_ain_readChannel(channel);
+            Serial.print("\tVoltage = ");
+            Serial.println(voltage);
+            delay(delayDuration);
 
-    digitalWrite(MUX_LS_AIN_A0, LOW);
-    digitalWrite(MUX_LS_AIN_A1, LOW);
-    digitalWrite(MUX_LS_AIN_A2, LOW);
-
-    digitalWrite(MUX_LS_SE_3_EN, LOW);
-    digitalWrite(MUX_LS_SE_2_EN, LOW);
-    digitalWrite(MUX_LS_SE_1_EN, HIGH);
-
-    digitalWrite(MUX_LS_SE_SEL_A0, LOW);
-    digitalWrite(MUX_LS_SE_SEL_A1, HIGH);
-
-    digitalWrite(MUX_LS_GAIN_A0, LOW);
-    digitalWrite(MUX_LS_GAIN_A1, LOW);
-
-    ADCmcp33151 adc_ls_se(CS_LS_SE_ADC, ADC_SPI_FREQ, VOLTAGE_REFERENCE, ADC_RESOLUTION);
-
-    while (1) {
-
-        float voltage = adc_ls_se.readVoltage();
-        Serial.print("Voltage = ");
-        Serial.println(voltage);
-        delay(delayDuration);
+            char buf[1000] = {0};
+            sprintf(buf, "LS SE AIN MUX 1 -- A2, A1, A0 = %d, %d, %d\r\n", 
+                digitalRead(MUX_LS_AIN_A2),
+                digitalRead(MUX_LS_AIN_A1),
+                digitalRead(MUX_LS_AIN_A0)
+            );
+            // Serial.print(buf);
+            sprintf(buf, "LS SE SEL MUX -- A1, A0 = %d, %d\r\n",
+                digitalRead(MUX_LS_SE_SEL_A1),
+                digitalRead(MUX_LS_SE_SEL_A0)
+            );
+            // Serial.print(buf);
+        }
     }
+
+    // digitalWrite(MUX_LS_AIN_A0, LOW);
+    // digitalWrite(MUX_LS_AIN_A1, LOW);
+    // digitalWrite(MUX_LS_AIN_A2, LOW);
+
+    // digitalWrite(MUX_LS_SE_3_EN, LOW);
+    // digitalWrite(MUX_LS_SE_2_EN, LOW);
+    // digitalWrite(MUX_LS_SE_1_EN, HIGH);
+
+    // digitalWrite(MUX_LS_SE_SEL_A0, LOW);
+    // digitalWrite(MUX_LS_SE_SEL_A1, HIGH);
+
+    // digitalWrite(MUX_LS_GAIN_A0, LOW);
+    // digitalWrite(MUX_LS_GAIN_A1, LOW);
+
+    // ADCmcp33151 adc_ls_se(CS_LS_SE_ADC, ADC_SPI_FREQ, VOLTAGE_REFERENCE, ADC_RESOLUTION);
+
+    // while (1) {
+
+    //     float voltage = adc_ls_se.readVoltage();
+    //     Serial.print("Voltage = ");
+    //     Serial.println(voltage);
+    //     delay(delayDuration);
+    // }
     
     
 }

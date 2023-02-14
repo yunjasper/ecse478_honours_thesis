@@ -24,14 +24,16 @@ AnalogMux::AnalogMux(uint8_t ctrlPin_a0, uint8_t ctrlPin_a1, uint8_t ctrlPin_a2,
   if (enable_pin >= 0) {
     isEnabled = false;
     setEnabled(false);  
-  } else { // negative value for enable_pin denotes always enabled
+  } 
+  else { // negative value for enable_pin denotes always enabled
     isEnabled = true;
   }
 }
 
+// assumes channel numbers passed to function are 0-based
 void AnalogMux::setChannel(uint8_t channel) {
   // check that channel number is valid 
-  if (channel > numChannels || channel < 0) {
+  if (channel >= numChannels || channel < 0) {
     Serial.println("Invalid channel number requested.");
     return; // invalid
   } 
@@ -53,7 +55,7 @@ void AnalogMux::setChannel(uint8_t channel) {
 void AnalogMux::setEnabled(bool enableState) {
   if (enable_pin >= 0) {
     digitalWrite(enable_pin, enableState);
-    isEnabled = enableState;  
+    isEnabled = enableState;
   }
 }
 

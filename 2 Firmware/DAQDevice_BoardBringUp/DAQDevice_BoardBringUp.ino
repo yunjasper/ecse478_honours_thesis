@@ -23,6 +23,9 @@ IntervalTimer myTimer;
 void buttonISR();
 
 void setup() {
+  Serial.begin(9600);
+  while (!Serial);
+  
   bringup_testing::init();
   SPI.begin();
 //  bringup_testing::blinky_onboardLED(250, 0);
@@ -30,7 +33,7 @@ void setup() {
 //  bringup_testing::blinky_DIOs(250, 0);
 //  bringup_testing::relays_all_toggle(500);
 
-  bringup_testing::ain_LS_SE_cycle_through(250, 20);
+  bringup_testing::ain_LS_SE_cycle_through(250, 5);
   
 }
 

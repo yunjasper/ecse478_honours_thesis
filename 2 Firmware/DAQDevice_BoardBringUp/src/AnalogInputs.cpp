@@ -110,43 +110,42 @@ void AnalogInputs::init() {
     ls_se_ain_readChannel(1);
     hs_de_ain_readChannel(1);
     hs_se_ain_readChannel(1);
+
+    ls_se_1_ain.setEnabled(true);   // no actual harm in all simultaneously enabled
+    ls_se_2_ain.setEnabled(true);
+    ls_se_3_ain.setEnabled(true);
 }
 
 float AnalogInputs::hs_se_ain_readChannel(uint8_t channel) {
-    hs_se_ain.setChannel(channel);
+    // todo: add volatile int to class member to remember which channel is currently set
+    // evaluate whether adding a check is more optimal than always setting the new channel
+    hs_se_ain.setChannel(channel - 1);
     return adc_hs_se.readVoltage();
 }
 
 float AnalogInputs::hs_de_ain_readChannel(uint8_t channel) {
-    hs_de_ain.setChannel(channel);
+    hs_de_ain.setChannel(channel - 1);
     return adc_hs_de.readVoltage();
 }
 
 float AnalogInputs::ls_se_ain_readChannel(uint8_t channel) {
-    if ((channel - 1) > 24 || (channel - 1) < 0) {
+    channel -= 1; // app level is 1-based, board-logic-level is 0-based
+
+    if (channel > 24 || channel < 0) {
         Serial.println("LS SE AIN set channel: invalid channel requested");
     }
-
-    // disconnect all LS SE AINs first (break before make switching) since
-    // we do not know which channel is currently connected
-    ls_se_1_ain.setEnabled(false);
-    ls_se_2_ain.setEnabled(false);
-    ls_se_3_ain.setEnabled(false);
     
-    if ((channel - 1) < 8) {
-        ls_se_select.setChannel(3); // see schematics
-        ls_se_1_ain.setEnabled(true);
+    if (channel < 8) {
+        ls_se_select.setChannel(3-1); // see schematics
         ls_se_1_ain.setChannel(channel);
     }
-    else if ((channel - 1) < 16) {
-        ls_se_select.setChannel(2); // see schematics
-        ls_se_2_ain.setEnabled(true);
-        ls_se_2_ain.setChannel(channel);
+    else if (channel < 16) {
+        ls_se_select.setChannel(2-1); // see schematics
+        ls_se_2_ain.setChannel(channel % 8);
     }
-    else if ((channel - 1) < 24) {
-        ls_se_select.setChannel(1); // see schematics
-        ls_se_3_ain.setEnabled(true);
-        ls_se_3_ain.setChannel(channel);
+    else if (channel < 24) {
+        ls_se_select.setChannel(1-1); // see schematics
+        ls_se_3_ain.setChannel(channel % 8);
     }
     
     return adc_ls_se.readVoltage();
