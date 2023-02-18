@@ -134,10 +134,11 @@ void bringup_testing::relays_all_toggle(long delayDuration) {
     }
 }
 
-void bringup_testing::ain_LS_SE_cycle_through(long delayDuration, uint16_t readsPerChannel) {
+void bringup_testing::ain_LS_SE_cycle_through(long delayDuration, uint16_t readsPerChannel, enum AnalogInputsGains gain) {
+    Serial.println("Starting LS SE Cycle Through...");
     AnalogInputs ains;
     ains.init();
-    ains.ls_se_ain_setGain(gain_1);
+    ains.ls_se_ain_setGain(gain);
     char bufff[1000] = {0};
     sprintf(bufff, "LS SE GAIN MUX -- A1, A0 = %d, %d\r\n",
         digitalRead(MUX_LS_GAIN_A1),
@@ -169,6 +170,73 @@ void bringup_testing::ain_LS_SE_cycle_through(long delayDuration, uint16_t reads
             // Serial.print(buf);
         }
     }
+    
+}
+
+void bringup_testing::ain_HS_SE_cycle_through(long delayDuration, uint16_t readsPerChannel, enum AnalogInputsGains gain) {
+    Serial.println("Starting HS SE Cycle Through...");
+    AnalogInputs ains;
+    ains.init();
+    ains.hs_se_ain_setGain(gain);
+    char bufff[1000] = {0};
+    sprintf(bufff, "HS SE GAIN MUX -- A1, A0 = %d, %d\r\n",
+        digitalRead(MUX_HS_SE_GAIN_A1),
+        digitalRead(MUX_HS_SE_GAIN_A0)
+    );
+    // Serial.print(bufff);
+
+    for (uint8_t channel = 1; channel <= 8; channel++) {
+        Serial.print("HS SE Channel = ");
+        Serial.println(channel);
+
+        for (uint16_t numReads = 0; numReads < readsPerChannel; numReads++) {
+            float voltage = ains.hs_se_ain_readChannel(channel);
+            Serial.print("\tVoltage = ");
+            Serial.println(voltage);
+            delay(delayDuration);
+
+            char buf[1000] = {0};
+            sprintf(buf, "HS SE AIN MUX -- A2, A1, A0 = %d, %d, %d\r\n", 
+                digitalRead(MUX_HS_SE_AIN_A2),
+                digitalRead(MUX_HS_SE_AIN_A1),
+                digitalRead(MUX_HS_SE_AIN_A0)
+            );
+            // Serial.print(buf);
+        }
+    }
+}
+
+void bringup_testing::ain_HS_DE_cycle_through(long delayDuration, uint16_t readsPerChannel, enum AnalogInputsGains gain) {
+    Serial.println("Starting HS DE Cycle Through...");
+    AnalogInputs ains;
+    ains.init();
+    ains.hs_de_ain_setGain(gain);
+    char bufff[1000] = {0};
+    sprintf(bufff, "HS DE GAIN MUX -- A1, A0 = %d, %d\r\n",
+        digitalRead(MUX_HS_DE_GAIN_A1),
+        digitalRead(MUX_HS_DE_GAIN_A0)
+    );
+    // Serial.print(bufff);
+
+    for (uint8_t channel = 1; channel <= 4; channel++) {
+        Serial.print("HS DE Channel = ");
+        Serial.println(channel);
+
+        for (uint16_t numReads = 0; numReads < readsPerChannel; numReads++) {
+            float voltage = ains.hs_de_ain_readChannel(channel);
+            Serial.print("\tVoltage = ");
+            Serial.println(voltage);
+            delay(delayDuration);
+
+            char buf[1000] = {0};
+            sprintf(buf, "HS DE AIN MUX -- A1, A0 = %d, %d\r\n", 
+                digitalRead(MUX_HS_DE_AIN_A1),
+                digitalRead(MUX_HS_DE_AIN_A0)
+            );
+            // Serial.print(buf);
+        }
+    }
+}
 
     // digitalWrite(MUX_LS_AIN_A0, LOW);
     // digitalWrite(MUX_LS_AIN_A1, LOW);
@@ -193,7 +261,6 @@ void bringup_testing::ain_LS_SE_cycle_through(long delayDuration, uint16_t reads
     //     Serial.println(voltage);
     //     delay(delayDuration);
     // }
-    
-    
-}
+
+
 

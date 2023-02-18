@@ -6,6 +6,7 @@
  */
 
 #pragma once
+#include "AnalogInputs.hpp"
 #include <stdint.h>
 
 namespace bringup_testing {
@@ -21,7 +22,9 @@ namespace bringup_testing {
     void relays_all_toggle(long delayDuration);
     
     // analog input tests
-    void ain_LS_SE_cycle_through(long delayDuration, uint16_t readsPerChannel);
+    void ain_LS_SE_cycle_through(long delayDuration, uint16_t readsPerChannel, enum AnalogInputsGains gain);
+    void ain_HS_SE_cycle_through(long delayDuration, uint16_t readsPerChannel, enum AnalogInputsGains gain);
+    void ain_HS_DE_cycle_through(long delayDuration, uint16_t readsPerChannel, enum AnalogInputsGains gain);
 
 
 

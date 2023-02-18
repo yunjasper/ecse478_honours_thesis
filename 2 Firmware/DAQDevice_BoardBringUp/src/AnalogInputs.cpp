@@ -17,7 +17,7 @@
 // TODO: CONSIDER USING AN INTERFACE INSTEAD
 
 // private variables
-AnalogMux hs_se_ain(
+static AnalogMux hs_se_ain(
     MUX_HS_SE_AIN_A0,
     MUX_HS_SE_AIN_A1,
     MUX_HS_SE_AIN_A2,
@@ -26,7 +26,7 @@ AnalogMux hs_se_ain(
     MUX_SWITCH_TIME
 );
 
-AnalogMux hs_de_ain(
+static AnalogMux hs_de_ain(
     MUX_HS_DE_AIN_A0,
     MUX_HS_DE_AIN_A1,
     -1,
@@ -35,7 +35,7 @@ AnalogMux hs_de_ain(
     MUX_SWITCH_TIME
 );
 
-AnalogMux ls_se_1_ain( // channels 1-8
+static AnalogMux ls_se_1_ain( // channels 1-8
     MUX_LS_AIN_A0,
     MUX_LS_AIN_A1,
     MUX_LS_AIN_A2,
@@ -44,7 +44,7 @@ AnalogMux ls_se_1_ain( // channels 1-8
     MUX_SWITCH_TIME
 );
 
-AnalogMux ls_se_2_ain( // channels 9-16
+static AnalogMux ls_se_2_ain( // channels 9-16
     MUX_LS_AIN_A0,
     MUX_LS_AIN_A1,
     MUX_LS_AIN_A2,
@@ -53,7 +53,7 @@ AnalogMux ls_se_2_ain( // channels 9-16
     MUX_SWITCH_TIME
 );
 
-AnalogMux ls_se_3_ain( // channels 17-24
+static AnalogMux ls_se_3_ain( // channels 17-24
     MUX_LS_AIN_A0,
     MUX_LS_AIN_A1,
     MUX_LS_AIN_A2,
@@ -62,7 +62,7 @@ AnalogMux ls_se_3_ain( // channels 17-24
     MUX_SWITCH_TIME
 );
 
-AnalogMux hs_se_gain(
+static AnalogMux hs_se_gain(
     MUX_HS_SE_GAIN_A0,
     MUX_HS_SE_GAIN_A1,
     -1,
@@ -71,7 +71,7 @@ AnalogMux hs_se_gain(
     MUX_SWITCH_TIME
 );
 
-AnalogMux hs_de_gain(
+static AnalogMux hs_de_gain(
     MUX_HS_DE_GAIN_A0,
     MUX_HS_DE_GAIN_A1,
     -1,
@@ -80,7 +80,7 @@ AnalogMux hs_de_gain(
     MUX_SWITCH_TIME
 );
 
-AnalogMux ls_se_gain(
+static AnalogMux ls_se_gain(
     MUX_LS_GAIN_A0,
     MUX_LS_GAIN_A1,
     -1,
@@ -89,7 +89,7 @@ AnalogMux ls_se_gain(
     MUX_SWITCH_TIME
 );
 
-AnalogMux ls_se_select(
+static AnalogMux ls_se_select(
     MUX_LS_SE_SEL_A0,
     MUX_LS_SE_SEL_A1,
     -1,
@@ -98,9 +98,9 @@ AnalogMux ls_se_select(
     MUX_SWITCH_TIME
 );
 
-ADCmcp33151 adc_hs_se(CS_HS_SE_ADC, ADC_SPI_FREQ, VOLTAGE_REFERENCE, ADC_RESOLUTION);
-ADCmcp33151 adc_hs_de(CS_HS_DE_ADC, ADC_SPI_FREQ, VOLTAGE_REFERENCE, ADC_RESOLUTION);
-ADCmcp33151 adc_ls_se(CS_LS_SE_ADC, ADC_SPI_FREQ, VOLTAGE_REFERENCE, ADC_RESOLUTION);
+static ADCmcp33151 adc_hs_se(CS_HS_SE_ADC, ADC_SPI_FREQ, VOLTAGE_REFERENCE, ADC_RESOLUTION);
+static ADCmcp33151 adc_hs_de(CS_HS_DE_ADC, ADC_SPI_FREQ, VOLTAGE_REFERENCE, ADC_RESOLUTION);
+static ADCmcp33151 adc_ls_se(CS_LS_SE_ADC, ADC_SPI_FREQ, VOLTAGE_REFERENCE, ADC_RESOLUTION);
 
 void AnalogInputs::init() {
     hs_se_ain_setGain(gain_1);
