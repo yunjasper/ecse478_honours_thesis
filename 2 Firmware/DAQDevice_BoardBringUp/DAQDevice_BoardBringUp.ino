@@ -35,27 +35,36 @@ void buttonISR();
 
 void setup() {
   SPI.begin(); // must call this first! todo: rewrite readChannel into read vs set channel
-  Serial.begin(9600);
-  while (!Serial); // do not start program until serial terminal is opened
+//  Serial.begin(9600);
+  bringup_testing::init();
+  ains.init();
+  
+//  while (!Serial); // do not start program until serial terminal is opened
 
   #if BRINGUP_TESTING
-  bringup_testing::init();
-  Serial.println("Passed BSP init");
-  ains.init();
-  Serial.println("Passed AINS init");
-//  bringup_testing::blinky_onboardLED(250, 0);
+  
+  bringup_testing::blinky_onboardLED(500, 0);
 //  bringup_testing::blinky_FIOs(250, 0);
 //  bringup_testing::blinky_DIOs(250, 0);
 //  bringup_testing::relays_all_toggle(500);
 
 //  bringup_testing::ain_LS_SE_cycle_through(250, 5, gain_1);
-//  bringup_testing::ain_HS_SE_cycle_through(250, 5, gain_1);
-//  while (1) {
-//    float voltage = ains.hs_de_ain_readChannel(2);
-//    Serial.println(voltage);
-//    delay(500);
-//  }
-  bringup_testing::ain_HS_DE_cycle_through(250, 25, gain_1);
+//  bringup_testing::ain_HS_SE_cycle_through(250, 10, gain_1);
+
+  ains.hs_se_ain_setGain(gain_1);
+  ains.hs_se_ain_readChannel(1);
+
+  ains.hs_de_ain_setGain(gain_100);
+  ains.hs_de_ain_readChannel(1);
+
+  while (1);
+
+  while (1) {
+    float voltage = ains.ls_se_ain_readChannel(1);
+    Serial.println(voltage);
+    delay(500);
+  }
+//  bringup_testing::ain_HS_DE_cycle_through(250, 25, gain_1);
   #endif
 
   // application logic

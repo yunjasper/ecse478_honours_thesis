@@ -120,7 +120,7 @@ float AnalogInputs::hs_se_ain_readChannel(uint8_t channel) {
     // todo: add volatile int to class member to remember which channel is currently set
     // evaluate whether adding a check is more optimal than always setting the new channel
     hs_se_ain.setChannel(channel - 1);
-    return adc_hs_se.readVoltage();
+    return (2.0 * adc_hs_se.readVoltage()); // 2.0 factor due to voltage divider...todo: refactor into constant
 }
 
 float AnalogInputs::hs_de_ain_readChannel(uint8_t channel) {
@@ -148,7 +148,7 @@ float AnalogInputs::ls_se_ain_readChannel(uint8_t channel) {
         ls_se_3_ain.setChannel(channel % 8);
     }
     
-    return adc_ls_se.readVoltage();
+    return (2.0 * adc_ls_se.readVoltage()); // 2.0 factor due to voltage divider...todo: refactor into constant
 }
 
 void AnalogInputs::hs_se_ain_setGain(enum AnalogInputsGains gain) {

@@ -32,11 +32,26 @@ void bringup_testing::init() {
 void bringup_testing::blinky_onboardLED(long delayDuration, uint16_t numBlinks) {
     Serial.println("Starting blinky onboard LED test...");
     
+    Adafruit_MCP23008 mcp;
+    mcp.begin(IO_EXPANSION_4_I2C_ADDR);
+    // set all pins as outputs
+    for(uint8_t i = 0; i < 8; i++) {
+        mcp.pinMode(i, OUTPUT);
+    }
+
     if (numBlinks == 0) { // blink forever
         while (1) {
             digitalWrite(DEBUG_LED1_PIN, HIGH);
             delay(delayDuration);
+            mcp.digitalWrite(6, HIGH);
+            delay(delayDuration);
+            mcp.digitalWrite(7, HIGH);
+            delay(delayDuration);
             digitalWrite(DEBUG_LED1_PIN, LOW);
+            delay(delayDuration);
+            mcp.digitalWrite(6, LOW);
+            delay(delayDuration);
+            mcp.digitalWrite(7, LOW);
             delay(delayDuration);
         }
     }
@@ -237,30 +252,4 @@ void bringup_testing::ain_HS_DE_cycle_through(long delayDuration, uint16_t reads
         }
     }
 }
-
-    // digitalWrite(MUX_LS_AIN_A0, LOW);
-    // digitalWrite(MUX_LS_AIN_A1, LOW);
-    // digitalWrite(MUX_LS_AIN_A2, LOW);
-
-    // digitalWrite(MUX_LS_SE_3_EN, LOW);
-    // digitalWrite(MUX_LS_SE_2_EN, LOW);
-    // digitalWrite(MUX_LS_SE_1_EN, HIGH);
-
-    // digitalWrite(MUX_LS_SE_SEL_A0, LOW);
-    // digitalWrite(MUX_LS_SE_SEL_A1, HIGH);
-
-    // digitalWrite(MUX_LS_GAIN_A0, LOW);
-    // digitalWrite(MUX_LS_GAIN_A1, LOW);
-
-    // ADCmcp33151 adc_ls_se(CS_LS_SE_ADC, ADC_SPI_FREQ, VOLTAGE_REFERENCE, ADC_RESOLUTION);
-
-    // while (1) {
-
-    //     float voltage = adc_ls_se.readVoltage();
-    //     Serial.print("Voltage = ");
-    //     Serial.println(voltage);
-    //     delay(delayDuration);
-    // }
-
-
 
