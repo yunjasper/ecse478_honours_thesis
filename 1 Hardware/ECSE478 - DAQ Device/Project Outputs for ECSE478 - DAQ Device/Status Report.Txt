@@ -1,0 +1,14 @@
+Project Outputs Generation Report
+---------------------------------
+Start Output Generation At 7:29:01 PM On 2023-03-25
+
+Output: Bill of Materials
+Type  : BOM
+From  : Variant [Production] of Project [ECSE478 - DAQ Device.PrjPcb]
+   Generated File[Bill of Materials-ECSE478 - DAQ Device(Production).xlsx]
+
+
+Files Generated   : 1
+Documents Printed : 0
+
+Finished Output Generation At 7:29:44 PM On 2023-03-25
